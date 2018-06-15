@@ -10,12 +10,14 @@ func new_game():
 	score = 0
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
+	$HUD.show_message("get ready")
+	$HUD.update_score(score)
 
 
 func game_over():
 	$ScoreTImer.stop()
 	$MobTimer.stop()
-
+	$HUD.game_over()
 
 func _on_StartTimer_timeout():
 	$MobTimer.start()
@@ -24,7 +26,7 @@ func _on_StartTimer_timeout():
 
 func _on_ScoreTImer_timeout():
 	score += 1
-
+	$HUD.update_score(score)
 
 func _on_MobTimer_timeout():
 	$MobPath/MobSpawnLocation.set_offset(randi())
